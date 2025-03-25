@@ -5,7 +5,11 @@
     <div>
         <h1 class="text-4xl text-success mb-4">Contact Manager</h1>
 
-        <label class="input">
+
+        {% include 'partials/add-contact-modal.html' %}
+
+
+        <label class="input mb-4">
             <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
                     <circle cx="11" cy="11" r="8"></circle>
@@ -27,6 +31,10 @@
 
             {% include 'partials/spinner.html' %}
         </label>
+        <button class="btn btn-primary ms-4 mb-4" onclick="contact_modal.showModal()">
+            Add new contact
+        </button>
+
 
         {% include 'partials/contact-list.html' %}
     </div>
