@@ -13,6 +13,8 @@ def index(request):
 
 @login_required
 def search_contact(request):
+    import time
+    time.sleep(2)
     query = request.GET.get('search', '')
     # use the query to filter contacts by name or email
     contacts = request.user.contacts.filter(Q(name__icontains=query) | Q(email__icontains=query))
