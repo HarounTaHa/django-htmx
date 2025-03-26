@@ -9,7 +9,11 @@
         {{ contact.created_at|date:"M d, Y" }}
     </td>
     <td>
-        <button class="btn btn-xs btn-error">
+        <button  hx-delete="{% url 'delete-contact' contact.pk %}"
+                 class="btn btn-xs btn-error"
+                 hx-target="#contacts-list"
+                 hx-confirm="Are you sure to delete?"
+        >
             Delete
         </button>
 

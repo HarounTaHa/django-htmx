@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -54,3 +56,11 @@ def create_contact(request):
         response['HX-Reswap'] = 'outerHTML'
         response['HX-Trigger-After-Settle'] = 'fail'
         return response
+
+
+@login_required
+@require_http_methods(['DELETE'])
+def delete_contact(request, pk):
+    request.user.contacts.filter(pk=pk).delete()
+    contacts = request.user.contacts.all().order_by('-created_at')
+    return render(request, 'partials/contact-list.html', {'contacts': contacts})

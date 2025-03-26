@@ -51,6 +51,12 @@
             });
 
         });
+
+        document.body.addEventListener('htmx:configRequest', function (evt) {
+            evt.detail.headers['X-CSRFToken'] = '{{ csrf_token }}'; // add a new parameter into the request
+        });
+
+
     </script>
 
 {% endblock %}
