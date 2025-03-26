@@ -41,10 +41,15 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded',()=>{
-            document.body.addEventListener('fail',()=>{
-               document.getElementById('contact_modal').showModal();
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('fail', () => {
+                document.getElementById('contact_modal').showModal();
             });
+
+            document.body.addEventListener('closeModal', (event) => {
+                document.getElementById('contact_modal').close();
+            });
+
         });
     </script>
 
