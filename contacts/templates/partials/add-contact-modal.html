@@ -3,8 +3,9 @@
         <h3>Add new Contact</h3>
 
         <form hx-post="{% url 'create-contact' %}"
-              hx-target="#contacts-list"
-              hx-swap="outerHTML"
+              hx-target="#contact-table-body"
+              hx-swap="afterbegin"
+              hx-on:success="contact_modal.close(); this.reset();"
               class="mb-4">
             {% csrf_token %}
             <div class="form-control w-full">
@@ -45,3 +46,27 @@
         </form>
     </div>
 </dialog>
+
+
+<script>
+    document.querySelector('[onclick="contact_modal.showModal()"]').addEventListener('click', function () {
+        // Get the form inside the modal
+        const form = document.querySelector('#contact_modal form');
+
+        // Reset the form to clear all input fields
+        form.reset();
+
+        // Additionally, explicitly clear the input values
+        const inputs = form.querySelectorAll('input[type="text"], input[type="email"]');
+        inputs.forEach(input => {
+            input.value = '';
+        });
+
+        // Clear error messages
+        const errorLabels = document.querySelectorAll('#contact_modal .label.text-error');
+        errorLabels.forEach(label => {
+            label.textContent = '';
+            label.style.display = 'none';
+        });
+    });
+</script>

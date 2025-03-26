@@ -46,10 +46,6 @@
                 document.getElementById('contact_modal').showModal();
             });
 
-            document.body.addEventListener('closeModal', (event) => {
-                document.getElementById('contact_modal').close();
-            });
-
         });
 
         document.body.addEventListener('htmx:configRequest', function (evt) {

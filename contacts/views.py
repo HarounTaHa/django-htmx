@@ -1,5 +1,3 @@
-import json
-
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -35,20 +33,8 @@ def create_contact(request):
         contact = form.save(commit=False)
         contact.user = request.user
         contact.save()
-
-        # Get all contacts to render the full list
-        contacts = Contact.objects.filter(user=request.user)
-
-        # Return the full contacts list
-        response = render(request, 'partials/contact-list.html', {'contacts': contacts})
+        response = render(request, 'partials/contact-row.html', {'contact': contact})
         response['HX-Trigger'] = 'success'
-
-        # Close the modal
-        response['HX-Trigger'] = json.dumps({
-            'success': True,
-            'closeModal': 'contact_modal'
-        })
-
         return response
     else:
         response = render(request, 'partials/add-contact-modal.html', {'form': form})
@@ -56,6 +42,7 @@ def create_contact(request):
         response['HX-Reswap'] = 'outerHTML'
         response['HX-Trigger-After-Settle'] = 'fail'
         return response
+
 
 
 @login_required
